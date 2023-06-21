@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Form.scss';
 
-import './Form.scss';
 function Form(props) {
-  const handleSubmit = e => {
+  const [url, setUrl] = useState('');
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const formData = {
       method: 'GET',
-      // url: e.target.elements.url.value,
-      url: 'https://pokeapi.co/api/v2/pokemon'
+      url: url || 'https://swapi.dev/api/people',
     };
     props.handleApiCall(formData);
   };
@@ -18,7 +18,12 @@ function Form(props) {
       <form onSubmit={handleSubmit}>
         <label>
           <span>URL: </span>
-          <input name='url' type='text' />
+          <input
+            name="url"
+            type="text"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
           <button type="submit">GO!</button>
         </label>
         <label className="methods">
