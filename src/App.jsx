@@ -29,8 +29,8 @@ function App() {
   return (
     <>
       <Header />
-      <div>Request Method: {requestParams.method}</div>
-      <div>URL: {requestParams.url}</div>
+      <div className='topDiv'>Request Method: {requestParams.method}</div>
+      <div className='topDiv'>URL: {requestParams.url}</div>
       <Form handleApiCall={callApi} />
       <Results loading={loading} headers={headers} data={data} />
       <Footer />
