@@ -1,0 +1,14 @@
+$bg-color: azure;
+
+
+footer{
+    background-color: azure;
+}
+
+footer {
+    background: darken($bg-color, 50);
+    border-top: 1px solid #eee;
+    padding: 1em 3em;
+    width:auto;
+    margin: 0;
+  }

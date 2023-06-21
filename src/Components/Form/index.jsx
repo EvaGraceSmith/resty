@@ -1,4 +1,5 @@
 import React from 'react';
+import './Form.scss';
 
 import './Form.scss';
 function Form(props) {
@@ -6,7 +7,8 @@ function Form(props) {
     e.preventDefault();
     const formData = {
       method: 'GET',
-      url: e.target.elements.url.value,
+      // url: e.target.elements.url.value,
+      url: 'https://pokeapi.co/api/v2/pokemon'
     };
     props.handleApiCall(formData);
   };

@@ -1,0 +1,9 @@
+$bg-color: azure;
+header {
+    background: darken($bg-color, 75);
+    border-bottom: 1px solid #eee;
+    color: #eee;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
