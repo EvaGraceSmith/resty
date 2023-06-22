@@ -7,21 +7,24 @@
 Our application will be an API testing tool that can be run in any browser, allowing a user to easily interact with APIs in a familiar interface.
 
 
-![Class 26 UML](./src/assets/Class26UML.png);
+
 
 ### Phase 1: Application Setup
 
-* Basic React Application
-* Scaffolding
-* Basic State
-* Rendering
+![Phase 1 UML](./src/assets/Class26UML.png);
 
-### Phase 2: Testing and Deployment
+In this first phase, our goal is to setup the basic scaffolding of the application, with intent being to add more functionality to the system as we go. This initial build sets up the file structure so that we can progressively build this application in a scalable manner.
 
-* Testing of React components and applications
-* Uses best practices for testing Behaviors and Acceptance Criteria
-* Integrates with an online CI framework
-* Deploy to GitHub Pages, Netlify, and/or AWS
+### Phase 2: Requirements
+
+![Phase 2 UML](./src/assets/Phase2UML.png)
+
+In phase 2, we will be receiving user input in preparation of connecting to live APIs, using the useState() hook in our functional components. In order to properly manage state with the useState hook, we will now convert <App /> to a functional component.
+
+The following user stories detail the major functionality for this phase of the project.
+
+* As a user, I want to enter the REST Method and URL to an API.
+* As a user, I want to see a summary of my request as well as results returned from an API request in my browser in a readable format.
 
 ### Phase 3: State and Props
 
@@ -45,3 +48,5 @@ RESTy is Deployed and publicly available
 Ryan Galloway - Instructor
 Daniel Frey - TA
 Mark Smith - Tutor
+
+!["Resty"](./src/assets/rusty.png)
