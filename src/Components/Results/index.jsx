@@ -16,24 +16,29 @@ function Results(props) {
   };
 
   const formatData = () => {
-    if (data) {
-      return JSON.stringify(data, undefined, 2);
-    }
-    return null;
+    if (!data) return null;
+
+    const { count, results, ...paginationData } = data;
+
+    const formattedData = {
+      count,
+      paginationData,
+      results,
+    };
+
+    return formattedData;
   };
 
   return (
     <section>
-            {loading && <Loading />}
-            <div className="response-headers" data-testid="response-headers">
+      {loading && <Loading />}
+      <div className="response-headers" data-testid="response-headers">
         <h3>Response Headers:</h3>
-        {/* <pre>{headers ? JSON.stringify(formatHeaders(), undefined, 2) : null}</pre> */}
         <JsonPretty data={formatHeaders()}></JsonPretty>
       </div>
       <div className="response-data" data-testid="response-data">
         <h3>Response Data:</h3>
-        <JsonPretty data={data}></JsonPretty>
-        {/* <pre>{formatData()}</pre> */}
+        <JsonPretty data={formatData()}></JsonPretty>
       </div>
     </section>
   );
