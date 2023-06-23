@@ -48,6 +48,13 @@ Application Flow:
 
 ### Phase 4: Fit and Finish
 
+In phase 4, we will be tracking every API call and storing it in history.
+
+The following user stories detail the major functionality for this phase of the project.
+
+As a user, I want to see a list of my previous API calls, so that I can see the results again, quickly.
+
+
 Incorporate the spinner, using conditional rendering
 App is Fully Tested
 App is Fully Documented

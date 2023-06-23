@@ -38,7 +38,11 @@ function Results(props) {
       </div>
       <div className="response-data" data-testid="response-data">
         <h3>Response Data:</h3>
-        <JsonPretty data={formatData()}></JsonPretty>
+        {data ? (
+          <JsonPretty data={formatData()}></JsonPretty>
+        ) : (
+          <p>No data available</p>
+        )}
       </div>
     </section>
   );
