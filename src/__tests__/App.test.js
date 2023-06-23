@@ -14,6 +14,9 @@ const server = setupServer(...handlers);
 // Setup the mock server before tests
 beforeAll(() => server.listen());
 
+// Reset any runtime request handlers we may add during the tests
+afterEach(() => server.resetHandlers());
+
 // Clean up the mock server after tests
 afterAll(() => server.close());
 
