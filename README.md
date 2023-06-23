@@ -15,7 +15,7 @@ Our application will be an API testing tool that can be run in any browser, allo
 
 In this first phase, our goal is to setup the basic scaffolding of the application, with intent being to add more functionality to the system as we go. This initial build sets up the file structure so that we can progressively build this application in a scalable manner.
 
-### Phase 2: Requirements
+### Phase 2: State and Props
 
 ![Phase 2 UML](./src/assets/Phase2UML.png)
 
@@ -26,7 +26,9 @@ The following user stories detail the major functionality for this phase of the 
 * As a user, I want to enter the REST Method and URL to an API.
 * As a user, I want to see a summary of my request as well as results returned from an API request in my browser in a readable format.
 
-### Phase 3: State and Props
+### Phase 3: useEffect()
+
+![Phase 3 UML](./src/assets/Phase3UML.png)
 
 In phase 3, we will be connecting RESTy to live APIs, fetching and displaying remote data. Our primary focus will be to service GET requests.
 
