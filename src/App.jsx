@@ -37,11 +37,18 @@ const reducer = (state, action) => {
         ...state,
         requestParams: action.payload,
       };
-    case 'ADD_TO_HISTORY':
-      return {
-        ...state,
-        history: [...state.history, action.payload],
-      };
+      case 'ADD_TO_HISTORY':
+        const updatedHistory = [...state.history, action.payload];
+        localStorage.setItem('history', JSON.stringify(updatedHistory));
+        return {
+          ...state,
+          history: updatedHistory,
+        };
+      case 'SET_HISTORY':
+        return {
+          ...state,
+          history: action.payload,
+        };
     default:
       return state;
   }
@@ -50,6 +57,13 @@ const reducer = (state, action) => {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { loading, data, headers, requestParams, history } = state;
+
+  useEffect(() => {
+    const storedHistory = localStorage.getItem('history');
+    if (storedHistory) {
+      dispatch({ type: 'SET_HISTORY', payload: JSON.parse(storedHistory) });
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
