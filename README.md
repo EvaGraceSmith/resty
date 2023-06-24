@@ -48,6 +48,8 @@ Application Flow:
 
 ### Phase 4: Fit and Finish
 
+![Phase 4 UML](./src/assets/Phase4UML.png)
+
 In phase 4, we will be tracking every API call and storing it in history.
 
 The following user stories detail the major functionality for this phase of the project.
