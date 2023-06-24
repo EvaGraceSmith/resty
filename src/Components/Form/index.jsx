@@ -46,7 +46,7 @@ function Form(props) {
             <option value="DELETE">DELETE</option>
           </select>
         </label>
-        {(method === 'POST' || method === 'PUT') && (
+        {(method === 'POST' || method === 'PUT'|| method === 'DELETE') && (
           <label>
             <span>JSON Body: </span>
             <textarea name="jsonInput" value={jsonInput} onChange={handleInputChange}></textarea>

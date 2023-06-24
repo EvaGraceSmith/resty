@@ -9,11 +9,12 @@ import './App.scss';
 
 const initialState = {
   loading: false,
-  data: null,
+  data: JSON.parse(localStorage.getItem('data')) || null,
   headers: new Headers(),
   requestParams: {},
-  history: [],
+  history: JSON.parse(localStorage.getItem('history')) || [],
 };
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -65,26 +66,71 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (requestParams.url) {
-          dispatch({ type: 'SET_LOADING', payload: true });
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      if (requestParams.url) {
+        dispatch({ type: 'SET_LOADING', payload: true });
+
+        if (requestParams.method === 'GET') {
           const response = await fetch(requestParams.url);
           const newData = await response.json();
+
+          // Retrieve existing data from local storage
+          const storedData = localStorage.getItem('data');
+          const existingData = JSON.parse(storedData) || [];
+
+          // Append the new response to the existing data array
+          const updatedData = [...existingData, newData];
+
+          // Store the updated data in local storage
+          localStorage.setItem('data', JSON.stringify(updatedData));
+
           dispatch({ type: 'SET_HEADERS', payload: response.headers });
           dispatch({ type: 'SET_DATA', payload: newData });
-          dispatch({ type: 'ADD_TO_HISTORY', payload: requestParams });
-          dispatch({ type: 'SET_LOADING', payload: false });
+        } else {
+          // Handle POST, PUT, and DELETE operations using local storage
+          let updatedData = null;
+          let updatedHeaders = new Headers();
+
+          if (requestParams.method === 'POST' || requestParams.method === 'PUT') {
+            // Handle POST and PUT by updating data in local storage
+            const storedData = localStorage.getItem('data');
+            const newData = JSON.parse(storedData) || [];
+            newData.push(requestParams.body);
+            localStorage.setItem('data', JSON.stringify(newData));
+            updatedData = newData;
+          } else if (requestParams.method === 'DELETE') {
+            console.log('DELETE' , requestParams.body);
+            // Handle DELETE by removing data from local storage
+            const storedData = localStorage.getItem('data');
+            const newData = JSON.parse(storedData) || [];
+
+            // Filter out the item to be deleted
+            const filteredData = newData.filter(item => !JSON.stringify(item).includes(requestParams.body));
+
+            // const filteredData = newData.filter(item => !item.includes(requestParams.body));
+            localStorage.setItem('data', JSON.stringify(filteredData));
+            updatedData = filteredData;
+          }
+
+          dispatch({ type: 'SET_HEADERS', payload: updatedHeaders });
+          dispatch({ type: 'SET_DATA', payload: updatedData });
         }
-      } catch (error) {
-        console.error('Error:', error);
+
+        dispatch({ type: 'ADD_TO_HISTORY', payload: requestParams });
         dispatch({ type: 'SET_LOADING', payload: false });
       }
-    };
+    } catch (error) {
+      console.error('Error:', error);
+      dispatch({ type: 'SET_LOADING', payload: false });
+    }
+  };
 
-    fetchData();
-  }, [requestParams]);
+  fetchData();
+}, [requestParams]);
+
+  
 
   const handleSubmit = (formData) => {
     dispatch({ type: 'SET_DATA', payload: null }); // Clear previous data
